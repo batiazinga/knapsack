@@ -152,8 +152,10 @@ var goldens = []golden{
 		values:   []int{8, 10, 15, 4},
 		solution: []bool{false, false, true, true},
 	},
+
 	// taken from
 	// https://people.sc.fsu.edu/~jburkardt/f77_src/knapsack/knapsack_prb_output.txt
+	// items are sorted by density, dense items first (density=value/weight)
 	{
 		k:        104,
 		weights:  []int{25, 35, 45, 5, 25, 3, 2, 2},
@@ -162,10 +164,37 @@ var goldens = []golden{
 	},
 	// same as above with ten times larger capacity and weights
 	// solution is the same
+	// Dynamic algorithms should slower (roughly 10 times)
+	// Exhaustive search should not be affected
 	{
 		k:        1040,
 		weights:  []int{250, 350, 450, 50, 250, 30, 20, 20},
 		values:   []int{350, 400, 450, 20, 70, 8, 5, 5},
 		solution: []bool{true, false, true, true, true, false, true, true},
+	},
+	// same but items are reversed
+	// solution is the same
+	// Dynamic algorithms should not be affected
+	// Exhaustive search should be slower
+	{
+		k:        104,
+		weights:  []int{2, 2, 3, 25, 5, 45, 35, 25},
+		values:   []int{5, 5, 8, 70, 20, 450, 400, 350},
+		solution: []bool{true, true, false, true, true, true, false, true},
+	},
+
+	// another example with dense items first
+	{
+		k:        102,
+		weights:  []int{2, 20, 20, 30, 40, 30, 60, 10},
+		values:   []int{15, 100, 90, 60, 40, 15, 10, 1},
+		solution: []bool{true, true, true, true, false, true, false, false},
+	},
+	// another example with dense items last
+	{
+		k:        102,
+		weights:  []int{10, 60, 30, 40, 30, 20, 20, 2},
+		values:   []int{1, 10, 15, 40, 60, 90, 100, 15},
+		solution: []bool{false, false, true, false, true, true, true, true},
 	},
 }

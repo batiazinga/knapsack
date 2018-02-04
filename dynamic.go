@@ -3,10 +3,7 @@ package knapsack
 import "github.com/batiazinga/bitarray"
 
 // Dynamic is a dynamic programming solution.
-// It is fast but costs a lot of memory: O(n * capacity) bytes.
-//
-// Note: to save memory, the matrix of changes instead of values is built
-// (i.e. four/eight times cheaper).
+// It runs in O(n * capacity) and cost O(n * capacity) bytes.
 func Dynamic(data Interface) []bool {
 	// initialize the change array
 	// items are rows (item 0 is row 1)

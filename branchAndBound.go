@@ -2,7 +2,6 @@ package knapsack
 
 // Exhaustive performs an (almost) exhaustive search of all solutions.
 // It is guaranted to find the optimal solution.
-// However, it works only for small instances.
 func Exhaustive(data Interface) []bool {
 	// backtrack
 	// init best solution so far: zero item solution
