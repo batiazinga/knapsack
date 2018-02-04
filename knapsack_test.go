@@ -35,6 +35,21 @@ func TestDynamicLightSlow(t *testing.T) {
 	}
 }
 
+func TestExhaustive(t *testing.T) {
+	for i, golden := range goldens {
+		// create a test instance
+		ti := testInstance{
+			golden: golden,
+			solve:  Exhaustive,
+		}
+		// run test
+		t.Run(
+			strconv.Itoa(i),
+			ti.test,
+		)
+	}
+}
+
 func BenchmarkDynamic(b *testing.B) {
 	for i, golden := range goldens {
 		// create a test instance
@@ -56,6 +71,21 @@ func BenchmarkDynamicLightSlow(b *testing.B) {
 		ti := testInstance{
 			golden: golden,
 			solve:  DynamicLightSlow,
+		}
+		// run benchmark
+		b.Run(
+			strconv.Itoa(i),
+			ti.bench,
+		)
+	}
+}
+
+func BenchmarkExhaustive(b *testing.B) {
+	for i, golden := range goldens {
+		// create a test instance
+		ti := testInstance{
+			golden: golden,
+			solve:  Exhaustive,
 		}
 		// run benchmark
 		b.Run(
