@@ -20,12 +20,12 @@ func TestDynamic(t *testing.T) {
 	}
 }
 
-func TestDynamicLightSlow(t *testing.T) {
+func TestDynamicLight(t *testing.T) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
 			golden: golden,
-			solve:  DynamicLightSlow,
+			solve:  DynamicLight,
 		}
 		// run test
 		t.Run(
@@ -65,12 +65,12 @@ func BenchmarkDynamic(b *testing.B) {
 	}
 }
 
-func BenchmarkDynamicLightSlow(b *testing.B) {
+func BenchmarkDynamicLight(b *testing.B) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
 			golden: golden,
-			solve:  DynamicLightSlow,
+			solve:  DynamicLight,
 		}
 		// run benchmark
 		b.Run(

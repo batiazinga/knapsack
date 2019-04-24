@@ -3,7 +3,7 @@ package knapsack
 import "github.com/batiazinga/bitarray"
 
 // Dynamic is a dynamic programming solution.
-// It runs in O(n * capacity) and cost O(n * capacity) bytes.
+// It runs in O(n * capacity) and costs O(n * capacity) bytes.
 func Dynamic(data Interface) []bool {
 	// initialize the change array
 	// items are rows (item 0 is row 1)
@@ -14,10 +14,10 @@ func Dynamic(data Interface) []bool {
 	return dynamic(data, a)
 }
 
-// DynamicLightSlow is a dynamic programming solution.
+// DynamicLight is a dynamic programming solution.
 // It is similar to Dynamic
 // but it is slower and uses asymptotically eight times less memory.
-func DynamicLightSlow(data Interface) []bool {
+func DynamicLight(data Interface) []bool {
 	// initialize the change array
 	// items are rows (item 0 is row 1)
 	// weights are columns (capacity is column k)
