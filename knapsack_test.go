@@ -9,8 +9,11 @@ func TestDynamic(t *testing.T) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
-			golden: golden,
-			solve:  Dynamic,
+			k:        golden.k,
+			values:   golden.values,
+			weights:  golden.weights,
+			solution: golden.solution,
+			solve:    Dynamic,
 		}
 		// run test
 		t.Run(
@@ -24,8 +27,11 @@ func TestDynamicLight(t *testing.T) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
-			golden: golden,
-			solve:  DynamicLight,
+			k:        golden.k,
+			values:   golden.values,
+			weights:  golden.weights,
+			solution: golden.solution,
+			solve:    DynamicLight,
 		}
 		// run test
 		t.Run(
@@ -39,8 +45,11 @@ func TestExhaustive(t *testing.T) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
-			golden: golden,
-			solve:  Exhaustive,
+			k:        golden.k,
+			values:   golden.values,
+			weights:  golden.weights,
+			solution: golden.solution,
+			solve:    Exhaustive,
 		}
 		// run test
 		t.Run(
@@ -54,8 +63,11 @@ func BenchmarkDynamic(b *testing.B) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
-			golden: golden,
-			solve:  Dynamic,
+			k:        golden.k,
+			values:   golden.values,
+			weights:  golden.weights,
+			solution: golden.solution,
+			solve:    Dynamic,
 		}
 		// run benchmark
 		b.Run(
@@ -69,8 +81,11 @@ func BenchmarkDynamicLight(b *testing.B) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
-			golden: golden,
-			solve:  DynamicLight,
+			k:        golden.k,
+			values:   golden.values,
+			weights:  golden.weights,
+			solution: golden.solution,
+			solve:    DynamicLight,
 		}
 		// run benchmark
 		b.Run(
@@ -84,8 +99,11 @@ func BenchmarkExhaustive(b *testing.B) {
 	for i, golden := range goldens {
 		// create a test instance
 		ti := testInstance{
-			golden: golden,
-			solve:  Exhaustive,
+			k:        golden.k,
+			values:   golden.values,
+			weights:  golden.weights,
+			solution: golden.solution,
+			solve:    Exhaustive,
 		}
 		// run benchmark
 		b.Run(
@@ -97,7 +115,10 @@ func BenchmarkExhaustive(b *testing.B) {
 
 type testInstance struct {
 	// data
-	golden
+	k               int
+	values, weights []int
+	// solution
+	solution []bool
 	// function to test
 	solve func(Interface) []bool
 }
@@ -136,16 +157,13 @@ func (ti testInstance) bench(b *testing.B) {
 	}
 }
 
-type golden struct {
+var goldens = []struct {
 	// data
-	k       int
-	values  []int
-	weights []int
+	k               int
+	values, weights []int
 	// solution
 	solution []bool
-}
-
-var goldens = []golden{
+}{
 	{
 		k:        11,
 		weights:  []int{4, 5, 8, 3},
